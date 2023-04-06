@@ -13,7 +13,7 @@ void FileSave::saveDataToFile(const QVector<QString>& dataToSave) {
     QFile fileToSave(fileName_);
     if(fileToSave.open(QIODevice::WriteOnly)) {
         QTextStream stream(&fileToSave);
-        stream.setCodec("UTF-8");
+        //stream.setCodec("UTF-8");
         for(const auto& el: dataToSave) {
             stream << el + "\n";
         }
