@@ -1,6 +1,8 @@
 #ifndef LOGINSCREEN_H
 #define LOGINSCREEN_H
 
+#include <QKeyEvent>
+#include <QCloseEvent>
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -17,5 +19,15 @@ public:
 
 private:
     Ui::LoginScreen *ui;
+
+    void database();
+    void showMainWindow();
+
+    void updateUsers();
+    void setCurrentUserToFile(QString currentUser);
+    void getLastUserFromFile(const QVector<QString> &lastUser);
+
+    void keyPressEvent(QKeyEvent *event);
+    void closeEvent(QCloseEvent *event);
 };
 #endif // LOGINSCREEN_H
