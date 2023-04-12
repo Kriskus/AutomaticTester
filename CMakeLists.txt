@@ -21,6 +21,13 @@ set(PROJECT_SOURCES
         database/database.h
         operation/fileread.h operation/fileread.cpp
         operation/filesave.h operation/filesave.cpp
+        structure/user.h
+        structure/sequence.h
+        structure/scenario.h
+        structure/testcase.h
+        structure/operations.h
+
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
