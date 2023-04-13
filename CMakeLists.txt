@@ -19,6 +19,7 @@ set(PROJECT_SOURCES
         main.cpp
         loginscreen.h loginscreen.cpp loginscreen.ui
         database/database.h
+        database/query/queryuser.h database/query/queryuser.cpp
         operation/fileread.h operation/fileread.cpp
         operation/filesave.h operation/filesave.cpp
         structure/user.h
