@@ -18,20 +18,10 @@ public:
     unsigned int getId() const { return id_; }
     QString getName() const { return name_; }
     QString getPassword() const { return password_; }
-    bool getUserType() const { return admin_; }
+    bool getPermission() const { return admin_; }
 
-    bool checkPassword(const QString& password) {
-        return password_ == password;
-    }
-
-    bool checkUserPermission(unsigned int idUserCreator) {
-        if(admin_) {
-            return true;
-        } else if(id_ == idUserCreator) {
-            return true;
-        }
-        return false;
-    }
+    bool checkPassword(const QString& password) { return password_ == password; }
+    bool checkUserPermission(unsigned int idUserCreator) { return id_ == idUserCreator; }
 
 private:
     unsigned int id_;
