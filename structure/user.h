@@ -6,11 +6,11 @@
 class User {
 
 public:
-    User(unsigned int id, const QString& name, const QString& password, bool userType)
+    User(unsigned int id, const QString& name, const QString& password, bool admin)
         : id_(id)
         , name_(name)
         , password_(password)
-        , userType_(userType)
+        , admin_(admin)
     {}
 
     ~User() {}
