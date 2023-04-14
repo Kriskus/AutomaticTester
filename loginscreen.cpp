@@ -1,11 +1,7 @@
 #include "loginscreen.h"
-#include "./ui_loginscreen.h"
+#include "ui_loginscreen.h"
 
 #include <QMessageBox>
-
-#include "database/database.h"
-
-#include "database/query/queryuser.h"
 
 LoginScreen::LoginScreen(QWidget *parent)
     : QMainWindow(parent)
@@ -17,7 +13,8 @@ LoginScreen::LoginScreen(QWidget *parent)
     connect(ui->pushButtonLogIn, &QPushButton::clicked, this, &LoginScreen::showMainWindow);
 
     database();
-    getLastUserFromFile({"asd"});
+
+    connect(ui->comboBoxUser, &QComboBox::currentIndexChanged, [this](int id) {currentUserId_ = id;});
 }
 
 LoginScreen::~LoginScreen()
@@ -30,19 +27,25 @@ void LoginScreen::database()
     QScopedPointer<Database> db(new Database());
     connect(db.get(), &Database::connectionStatus, ui->statusbar, &QStatusBar::showMessage);
     db->connect();
-    QueryUser query;
-    query.userSELECT();
+    connect(queryUser.get(), &QueryUser::sendUsers, this, &LoginScreen::updateUsers);
+    queryUser->userSELECT();
 }
 
 void LoginScreen::showMainWindow()
 {
-    setCurrentUserToFile("asd");
-    //ui->statusbar->showMessage("Show Main Window");
+    if(users_[currentUserId_].get()->checkPassword(ui->lineEditPassword->text())) {
+        ui->statusbar->showMessage("Password correct!");
+    } else {
+        ui->statusbar->showMessage("Password incorrect!");
+    }
 }
 
-void LoginScreen::updateUsers()
+void LoginScreen::updateUsers(const QVector<std::shared_ptr<User> > &users)
 {
-    //ui->statusbar->showMessage("Update users");
+    users_ = users;
+    for(auto user : users_) {
+        ui->comboBoxUser->addItem(user.get()->getName());
+    }
 }
 
 void LoginScreen::setCurrentUserToFile(QString currentUser)
