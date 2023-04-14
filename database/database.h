@@ -19,12 +19,14 @@ public:
             line.replace("\n", "");
             line.replace("\r", "");
         }
+        if(dbConfig.size() > 2) {
         fileRead.reset();
         db_.setHostName(dbConfig[0]);
         db_.setPort(3306);
         db_.setDatabaseName(dbConfig[1]);
         db_.setUserName(dbConfig[2]);
         db_.setPassword(dbConfig[3]);
+        }
     }
     ~Database(){}
 
