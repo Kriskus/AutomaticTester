@@ -2,14 +2,15 @@
 #define QUERY_H
 
 #include <QObject>
-#include <QSqlQuery>
 #include <QVector>
-#include <QVariant>
 #include <memory>
 
 #include "../../structure/user.h"
 
-class QueryUser {
+class QueryUser : public QObject
+{
+    Q_OBJECT
+
 public:
     QueryUser();
     ~QueryUser();
@@ -20,8 +21,7 @@ public:
     void userUPDATE();
 
 private:
-    QVector<std::shared_ptr<User>> users{};
-    QSqlQuery query_;
+    QVector<std::shared_ptr<User>> users_{};
 
 signals:
     void sendUsers(QVector<std::shared_ptr<User>>);
