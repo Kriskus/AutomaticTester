@@ -5,6 +5,8 @@
 
 #include "database/database.h"
 
+#include "database/query/queryuser.h"
+
 LoginScreen::LoginScreen(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::LoginScreen)
@@ -28,27 +30,29 @@ void LoginScreen::database()
     QScopedPointer<Database> db(new Database());
     connect(db.get(), &Database::connectionStatus, ui->statusbar, &QStatusBar::showMessage);
     db->connect();
+    QueryUser query;
+    query.userSELECT();
 }
 
 void LoginScreen::showMainWindow()
 {
     setCurrentUserToFile("asd");
-    ui->statusbar->showMessage("Show Main Window");
+    //ui->statusbar->showMessage("Show Main Window");
 }
 
 void LoginScreen::updateUsers()
 {
-    ui->statusbar->showMessage("Update users");
+    //ui->statusbar->showMessage("Update users");
 }
 
 void LoginScreen::setCurrentUserToFile(QString currentUser)
 {
-    ui->statusbar->showMessage("Save current user to file");
+    //ui->statusbar->showMessage("Save current user to file");
 }
 
 void LoginScreen::getLastUserFromFile(const QVector<QString> &lastUser)
 {
-    ui->statusbar->showMessage("Get last user from file");
+    //ui->statusbar->showMessage("Get last user from file");
 }
 
 void LoginScreen::keyPressEvent(QKeyEvent *event)
